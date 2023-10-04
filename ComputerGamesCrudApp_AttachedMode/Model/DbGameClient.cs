@@ -80,7 +80,7 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
         // 1. конвертация строки результата в объект Game
         private Game ConvertReaderRow(SqlDataReader reader)
         {
-            long id = (long)reader["id"];
+            int id = (int)reader["id"];
             string name = (string)reader["name_f"];
             int releasedIn = (int)reader["released_in_f"];
             decimal price = (decimal)reader["price_f"];
