@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using DevExpress.Utils.CommonDialogs.Internal;
+using System.Text.RegularExpressions;
 
 namespace ComputerGamesCrudApp_AttachedMode
 {
@@ -84,17 +85,17 @@ namespace ComputerGamesCrudApp_AttachedMode
                 MessageBox.Show($"Error during insert object: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        // выбранный обьект, планирую удалять
+        // выбранный обьект, планирую удалять в листбоксе
         private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<Game> games = dbClient.SelectAll();
 
             if (gamesListBox.SelectedItem is Game  )
             {
-                MessageBoxResult result = MessageBox.Show($"Выбранный обьект: " + "\n" + gamesListBox.SelectedItem.ToString());
+                //MessageBoxResult result = MessageBox.Show($"Выбранный обьект: " + "\n" + gamesListBox.SelectedItem.ToString());
                 string selectrow = gamesListBox.SelectedItem.ToString().Split().First();
                 int id_game_t = Convert.ToInt32(selectrow);
-                MessageBoxResult msg = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+                MessageBoxResult msg = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
                 if (msg == MessageBoxResult.Yes)
                 {
                     //do something
@@ -107,6 +108,12 @@ namespace ComputerGamesCrudApp_AttachedMode
                 }
                 
             }
+        }
+        // проверка на ввод только чисел addRelesedInTextBox,addPriceTextBox
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
