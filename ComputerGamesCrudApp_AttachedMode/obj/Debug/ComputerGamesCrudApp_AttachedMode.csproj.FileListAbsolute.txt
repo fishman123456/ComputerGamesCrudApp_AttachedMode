@@ -44,3 +44,6 @@ C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\Comp
 C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\obj\Debug\ComputerGamesCrudApp_AttachedMode.csproj.CoreCompileInputs.cache
 C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\obj\Debug\ComputerGamesCrudApp_AttachedMode.exe
 C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\obj\Debug\ComputerGamesCrudApp_AttachedMode.pdb
+C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\bin\Debug\DevExpress.Data.v23.1.dll
+C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\bin\Debug\DevExpress.Data.v23.1.xml
+C:\Users\Fishman.DB.CORP\Documents\GitHub\ComputerGamesCrudApp_AttachedMode\ComputerGamesCrudApp_AttachedMode\obj\Debug\ComputerGamesCrudApp_AttachedMode.csproj.CopyComplete

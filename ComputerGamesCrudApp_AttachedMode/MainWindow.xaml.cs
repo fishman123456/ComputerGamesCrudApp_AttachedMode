@@ -1,8 +1,11 @@
 ﻿using ComputerGamesCrudApp_AttachedMode.Model;
+
+
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
+using DevExpress.Utils.CommonDialogs.Internal;
 
 namespace ComputerGamesCrudApp_AttachedMode
 {
@@ -77,6 +82,30 @@ namespace ComputerGamesCrudApp_AttachedMode
             } catch (Exception ex)
             {
                 MessageBox.Show($"Error during insert object: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        // выбранный обьект, планирую удалять
+        private void usersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            List<Game> games = dbClient.SelectAll();
+
+            if (gamesListBox.SelectedItem is Game  )
+            {
+                MessageBoxResult result = MessageBox.Show($"Выбранный обьект: " + "\n" + gamesListBox.SelectedItem.ToString());
+                string selectrow = gamesListBox.SelectedItem.ToString().Split().First();
+                int id_game_t = Convert.ToInt32(selectrow);
+                MessageBoxResult msg = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNoCancel, MessageBoxImage.Information);
+                if (msg == MessageBoxResult.Yes)
+                {
+                    //do something
+                    dbClient.Delete(id_game_t);
+                    updateGameList();
+                }
+                else if (msg == MessageBoxResult.No)
+                {
+                    //do something else
+                }
+                
             }
         }
     }

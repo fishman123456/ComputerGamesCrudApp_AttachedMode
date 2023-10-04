@@ -26,7 +26,7 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
         {
             using (SqlConnection connection = connectionProvider.OpenDbConnection())
             {
-                SqlCommand cmd = new SqlCommand("SELECT * FROM game_t;", connection);
+                SqlCommand cmd = new SqlCommand("SELECT * FROM game_t order by id;", connection);
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     // считать строки результат в List<Game>
@@ -61,12 +61,26 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
                     throw new Exception($"rowsAffected {rowsAffected} != 1");
                 }
             }
+            // 4. Удалить запись
+
         }
 
         // 4. удалить запись по id
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = connectionProvider.OpenDbConnection())
+            {
+                // формируем команду delete 
+                SqlCommand cmd = new SqlCommand(
+                    "delete game_t where id = " + id + ";" , connection);
+                // выполняем запрос
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected != 1)
+                {
+                    // если результат не соответствует ожидаемому значению, то выбросить исключение
+                    throw new Exception($"rowsaffected {rowsAffected} != 1");
+                }
+            }
         }
 
         // 5. обновить запись по id

@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerGamesCrudApp_AttachedMode"
         mc:Ignorable="d"
-        Title="Computer Games Crud App (Attached Mode)" Height="450" MinWidth="1000" FontSize="25">
-    <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        Title="Computer Games Crud App (Attached Mode)" Height="450" Width="1000" MinHeight="450" MinWidth="1000" FontSize="25" 
+        WindowStartupLocation="CenterScreen">
+    <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Visible" 
+                ScrollViewer.VerticalScrollBarVisibility="Visible">
         <!-- меню навигации -->
         <Menu FontSize="25">
             <MenuItem Header="Actions">
@@ -15,7 +17,7 @@
         </Menu>
 
         <!-- Добавление объекта -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
             <Label Content="Name:" Margin="10"/>
             <TextBox x:Name="addNameTextBox" Width="150" Margin="10"/>
             <Label Content="ReleasedIn:" Margin="10"/>
@@ -26,9 +28,11 @@
         </StackPanel>
         <StackPanel>
             <!-- Список объектов -->
-            <ListBox x:Name="gamesListBox"  Height="200" 
-            ScrollViewer.CanContentScroll="True"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+            <ListBox x:Name="gamesListBox" SelectionChanged="usersList_SelectionChanged"
+                     Height="200" 
+                     ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                
+            </ListBox>
         </StackPanel>
     </StackPanel>
 </Window>
