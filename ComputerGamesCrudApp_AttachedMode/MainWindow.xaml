@@ -24,8 +24,11 @@
             <TextBox x:Name="addPriceTextBox" Width="150" Margin="10"/>
             <Button x:Name="addButton" Content="Add" Width="100" Margin="10" Click="addButton_Click"/>
         </StackPanel>
-
-        <!-- Список объектов -->
-        <ListBox x:Name="gamesListBox" />
+        <StackPanel>
+            <!-- Список объектов -->
+            <ListBox x:Name="gamesListBox"  Height="200" 
+            ScrollViewer.CanContentScroll="True"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"/>
+        </StackPanel>
     </StackPanel>
 </Window>
