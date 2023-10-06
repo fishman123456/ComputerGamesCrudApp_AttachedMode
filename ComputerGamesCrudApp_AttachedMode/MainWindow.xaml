@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ComputerGamesCrudApp_AttachedMode"
         mc:Ignorable="d"
-        Title="Computer Games Crud App (Attached Mode)" Height="450" Width="1000" MinHeight="450" MinWidth="1000" FontSize="25" 
+        Title="Computer Games Crud App (Attached Mode)" Height="450" Width="1120" MinHeight="450" MinWidth="1100" FontSize="25" 
         WindowStartupLocation="CenterScreen">
     <StackPanel Orientation="Vertical" ScrollViewer.HorizontalScrollBarVisibility="Visible" 
                 ScrollViewer.VerticalScrollBarVisibility="Visible">
@@ -29,10 +29,22 @@
         <StackPanel>
             <!-- Список объектов -->
             <ListBox x:Name="gamesListBox" SelectionChanged="usersList_SelectionChanged"
-                     Height="200" 
+                     Height="250" 
                      ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
                 
             </ListBox>
+        </StackPanel>
+        <!-- Изменение обьекта -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <Label Content="Id:" Margin="10"/>
+            <TextBox x:Name="modifiedIdTextBox" Width="50" Margin="10" IsReadOnly="True"/>
+            <Label Content="Name:" Margin="10"/>
+            <TextBox x:Name="modifiedNameTextBox" Width="150" Margin="10" />
+            <Label Content="ReleasedIn:" Margin="10"/>
+            <TextBox x:Name="modifiedRelesedInTextBox" Width="150" Margin="10" PreviewTextInput="NumberValidationTextBox"/>
+            <Label Content="Price:" Margin="10"/>
+            <TextBox x:Name="modifiedPriceTextBox" Width="150" Margin="10" PreviewTextInput="NumberValidationTextBox"/>
+            <Button x:Name="modifiedButton" Content="Mod" Width="100" Margin="10" Click="ModifiedButton_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>

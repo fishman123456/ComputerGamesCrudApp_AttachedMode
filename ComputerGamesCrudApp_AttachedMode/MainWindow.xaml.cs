@@ -90,30 +90,77 @@ namespace ComputerGamesCrudApp_AttachedMode
         {
             List<Game> games = dbClient.SelectAll();
 
-            if (gamesListBox.SelectedItem is Game  )
+            if (gamesListBox.SelectedItem is Game)
             {
                 //MessageBoxResult result = MessageBox.Show($"Выбранный обьект: " + "\n" + gamesListBox.SelectedItem.ToString());
                 string selectrow = gamesListBox.SelectedItem.ToString().Split().First();
                 int id_game_t = Convert.ToInt32(selectrow);
-                MessageBoxResult msg = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                if (msg == MessageBoxResult.Yes)
+                MessageBoxResult resdelete = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                MessageBoxResult resupgrade = MessageBox.Show("Изменяем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                if (resdelete == MessageBoxResult.Yes)
                 {
                     //do something
                     dbClient.Delete(id_game_t);
                     updateGameList();
                 }
-                else if (msg == MessageBoxResult.No)
+                else if (resdelete == MessageBoxResult.No)
                 {
                     //do something else
                 }
-                
+            
+
+                if (resupgrade == MessageBoxResult.Yes)
+                {
+                    // считываем выбранную запись как строку 
+                    List<string> strings = new List<string>();
+                    string  selectrowid = gamesListBox.SelectedItem.ToString();
+                    char[] splitchar = { '-' };
+                    foreach(string sel in selectrowid.Split(splitchar))
+                    {
+                        strings.Add(sel);
+                    }
+                    //  добавляем её в обьект c индексом
+                    int id = Convert.ToInt32(strings[0]);
+                    string name = strings[1];
+                    int releasedIn = Convert.ToInt32(strings[2]);
+                    decimal price = Convert.ToDecimal(strings[3]);
+                    Game newGame = new Game() {Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
+                    // вписываем обьект по полям в textbox для изменения
+                    modifiedIdTextBox.Text = id.ToString();
+                    modifiedNameTextBox.Text = name;
+                    modifiedRelesedInTextBox.Text = releasedIn.ToString();
+                    modifiedPriceTextBox.Text = price.ToString();
+
+                }
+                else if (resupgrade == MessageBoxResult.No)
+                {
+                    //do something else
+                }
+            
             }
         }
+        // принимаем изменения по нажатию на modifiedButton
+        private void ModifiedButton_Click(object sender, RoutedEventArgs e)
+        {
+            // добавление измененной  записи
+            int id = Convert.ToInt32(modifiedIdTextBox.Text);
+            string name = modifiedNameTextBox.Text;
+            int releasedIn = Convert.ToInt32(modifiedRelesedInTextBox.Text);
+            decimal price = Convert.ToDecimal(modifiedPriceTextBox.Text);
+            Game newGame = new Game() {Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
+            // вызывавем метод добавления обьекта в базу данных
+            dbClient.Update(newGame);
+            updateGameList();
+        }
+
+
         // проверка на ввод только чисел addRelesedInTextBox,addPriceTextBox
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+      
     }
 }

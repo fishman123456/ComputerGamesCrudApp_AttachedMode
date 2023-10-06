@@ -86,7 +86,27 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
         // 5. обновить запись по id
         public void Update(Game game)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = connectionProvider.OpenDbConnection())
+            {
+                // формируем команду INSERT с использованием параметров запроса
+                SqlCommand cmd = new SqlCommand(
+                    "update game_t  set name_f = @name, released_in_f = @released_in, price_f = @price " +
+                    "where Id =  @id;",
+                    connection
+                );
+                // добавляем параметры в запрос
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = game.Id;
+                cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = game.Name;
+                cmd.Parameters.Add("@released_in", System.Data.SqlDbType.Int).Value = game.ReleasedIn;
+                cmd.Parameters.Add("@price", System.Data.SqlDbType.Decimal).Value = game.Price;
+                // выполняем запрос
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected != 1)
+                {
+                    // если результат не соответствует ожидаемому значению, то выбросить исключение
+                    throw new Exception($"rowsAffected {rowsAffected} != 1");
+                }
+            }
         }
 
         // ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ
