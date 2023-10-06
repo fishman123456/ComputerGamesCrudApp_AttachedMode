@@ -75,7 +75,7 @@ namespace ComputerGamesCrudApp_AttachedMode
                 // добавление новой записи
                 string name = addNameTextBox.Text;
                 int releasedIn = Convert.ToInt32(addRelesedInTextBox.Text);
-                decimal price = Convert.ToDecimal(addPriceTextBox.Text);
+                int price = Convert.ToInt32(addPriceTextBox.Text);
                 Game newGame = new Game() { Name = name, ReleasedIn = releasedIn, Price = price };
                 dbClient.Insert(newGame);
                 MessageBox.Show("Object successfully added", "Successfull", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -96,7 +96,7 @@ namespace ComputerGamesCrudApp_AttachedMode
                 string selectrow = gamesListBox.SelectedItem.ToString().Split().First();
                 int id_game_t = Convert.ToInt32(selectrow);
                 MessageBoxResult resdelete = MessageBox.Show("Удаляем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
-                MessageBoxResult resupgrade = MessageBox.Show("Изменяем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
                 if (resdelete == MessageBoxResult.Yes)
                 {
                     //do something
@@ -105,17 +105,15 @@ namespace ComputerGamesCrudApp_AttachedMode
                 }
                 else if (resdelete == MessageBoxResult.No)
                 {
-                    //do something else
-                }
-            
+                    MessageBoxResult resupgrade = MessageBox.Show("Изменяем строку?", " ", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
-                if (resupgrade == MessageBoxResult.Yes)
-                {
                     // считываем выбранную запись как строку 
                     List<string> strings = new List<string>();
-                    string  selectrowid = gamesListBox.SelectedItem.ToString();
+                    string selectrowid = gamesListBox.SelectedItem.ToString();
+                    // создаем массив для разбиения строки на подстроки
                     char[] splitchar = { '-' };
-                    foreach(string sel in selectrowid.Split(splitchar))
+                    // разбиваем строку на подстроки с применением массива разбивочных элементов
+                    foreach (string sel in selectrowid.Split(splitchar))
                     {
                         strings.Add(sel);
                     }
@@ -123,8 +121,8 @@ namespace ComputerGamesCrudApp_AttachedMode
                     int id = Convert.ToInt32(strings[0]);
                     string name = strings[1];
                     int releasedIn = Convert.ToInt32(strings[2]);
-                    decimal price = Convert.ToDecimal(strings[3]);
-                    Game newGame = new Game() {Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
+                    int price = Convert.ToInt32(strings[3]);
+                    Game newGame = new Game() { Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
                     // вписываем обьект по полям в textbox для изменения
                     modifiedIdTextBox.Text = id.ToString();
                     modifiedNameTextBox.Text = name;
@@ -132,11 +130,6 @@ namespace ComputerGamesCrudApp_AttachedMode
                     modifiedPriceTextBox.Text = price.ToString();
 
                 }
-                else if (resupgrade == MessageBoxResult.No)
-                {
-                    //do something else
-                }
-            
             }
         }
         // принимаем изменения по нажатию на modifiedButton
@@ -146,7 +139,7 @@ namespace ComputerGamesCrudApp_AttachedMode
             int id = Convert.ToInt32(modifiedIdTextBox.Text);
             string name = modifiedNameTextBox.Text;
             int releasedIn = Convert.ToInt32(modifiedRelesedInTextBox.Text);
-            decimal price = Convert.ToDecimal(modifiedPriceTextBox.Text);
+            int price = Convert.ToInt32(modifiedPriceTextBox.Text);
             Game newGame = new Game() {Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
             // вызывавем метод добавления обьекта в базу данных
             dbClient.Update(newGame);

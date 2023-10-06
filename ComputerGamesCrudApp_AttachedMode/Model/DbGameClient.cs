@@ -52,7 +52,7 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
                 // добавляем параметры в запрос
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = game.Name;
                 cmd.Parameters.Add("@released_in", System.Data.SqlDbType.Int).Value = game.ReleasedIn;
-                cmd.Parameters.Add("@price", System.Data.SqlDbType.Decimal).Value = game.Price;
+                cmd.Parameters.Add("@price", System.Data.SqlDbType.Int).Value = game.Price;
                 // выполняем запрос
                 int rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected != 1)
@@ -98,7 +98,7 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = game.Id;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.NVarChar).Value = game.Name;
                 cmd.Parameters.Add("@released_in", System.Data.SqlDbType.Int).Value = game.ReleasedIn;
-                cmd.Parameters.Add("@price", System.Data.SqlDbType.Decimal).Value = game.Price;
+                cmd.Parameters.Add("@price", System.Data.SqlDbType.Int).Value = game.Price;
                 // выполняем запрос
                 int rowsAffected = cmd.ExecuteNonQuery();
                 if (rowsAffected != 1)
@@ -117,7 +117,7 @@ namespace ComputerGamesCrudApp_AttachedMode.Model
             int id = (int)reader["id"];
             string name = (string)reader["name_f"];
             int releasedIn = (int)reader["released_in_f"];
-            decimal price = (decimal)reader["price_f"];
+            int price = (int)reader["price_f"];
             return new Game() { Id = id, Name = name, ReleasedIn = releasedIn, Price = price };
         }
 
